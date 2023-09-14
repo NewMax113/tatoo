@@ -1,0 +1,24 @@
+.divs {
+    display: flex;
+    position: relative;
+    justify-content: center; 
+}
+.test {
+    margin: 26px 44px 30px 44px;
+    font-size: 24px;
+}
+.test3 {
+    margin: 19px 100px 29px 44px;
+    font-size: 26px;
+}
+.test a {
+    color: white;
+}
+.test3 a{
+    color: white;
+}
+.phone{
+    margin: 26px 30px 30px 300px;
+    font-size: 24px;
+    color: white;
+}

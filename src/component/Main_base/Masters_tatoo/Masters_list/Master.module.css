@@ -1,0 +1,21 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    column-gap: 31px;
+    row-gap: 62px;
+    margin-top: 300px;
+}
+
+.style_tatoo {
+    background-color: brown;
+    width: 197.36px;
+    height: 303px;
+}
+
+.back {
+    background-color:  black;
+}
