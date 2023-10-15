@@ -1,0 +1,15 @@
+.img {
+    width: 600px;
+    height: 200px;
+}
+
+.colums {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    column-gap: 31px;
+    row-gap: 62px;
+}

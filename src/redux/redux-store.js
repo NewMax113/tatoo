@@ -1,6 +1,7 @@
-import { combineReducers, legacy_createStore as createStore } from "redux";
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
 import { post } from "./post-reducer";
 import { masters } from "./master-reducer";
+import thunk from "redux-thunk";
 
 
 let redusers = combineReducers(
@@ -10,6 +11,6 @@ let redusers = combineReducers(
     }
 )
 
-let store = createStore(redusers)
+let store = createStore(redusers, applyMiddleware(thunk))
 
 export default store

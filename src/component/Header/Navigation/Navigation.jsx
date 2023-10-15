@@ -16,7 +16,7 @@ const Navigation = () => {
                 <NavLink to='/masters'>Мастера</NavLink>
             </div>
             <div className={style.test}>
-                <a href="">Наши работы</a>
+            <NavLink to='/works_img'>Наши работы</NavLink>
             </div>
             <div className={style.test}>
                 <a href="">Отзывы</a>

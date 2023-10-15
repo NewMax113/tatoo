@@ -1,14 +1,20 @@
 import React, {  } from 'react'
 import style from './Master.module.css'
+import { useNavigate } from 'react-router-dom'
+import { ids } from '../../../../redux/master-reducer'
 
 const Master = (props) => {
+    let nav = useNavigate()
     return (
-        <div id={props.id} key={props.id}>
-            <div className={style.style_tatoo}>
-                {props.name}
-                <img src={props.img} alt="" />
-            </div>
-        </div>
+<div className={style.style_tatoo}>
+      <div ><img src={props.img} className={style.img_card}></img></div>
+      <div className={style.text_card}>{props.name}</div>
+      <button onClick={() => {
+        nav(`/masters/${props.id}`)
+        props.ids(props.id)
+      }}
+        className={style.btn}>Прочитать</button>
+    </div>
     )
 }
 
