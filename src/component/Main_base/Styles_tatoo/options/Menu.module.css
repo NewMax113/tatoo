@@ -1,0 +1,18 @@
+.vis {
+    height: 500px;
+    width: 200px;
+    /* position: fixed; */
+    float: left;
+    border: 2px solid red;
+    background-color: blue;
+}
+
+.novis {
+    height: 500px;
+    width: 200px;
+    /* position: fixed; */
+    float: left;
+    border: 2px solid red;
+    background-color: blue;
+    display: none;
+}
