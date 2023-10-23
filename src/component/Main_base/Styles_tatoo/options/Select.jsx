@@ -4,16 +4,17 @@ function Select({ obj, className, onChange, defaultValue }) {
   let [target, setTarget] = useState('')
 
   return (
+    <div className={className}> Сортиовка:
     <select
-      className={className}
+      
       value={target}
       onChange={e => {
         onChange(e.target.value)
         setTarget(e.target.value)
         }}>
-      <option value='' disabled>{defaultValue}</option>
-      {obj.map(val => <option key={val.value} value={val.value}>{val.text}</option>)}
-    </select>
+      <option value='' disabled style={{background: 'black'}}>{defaultValue}</option>
+      {obj.map(val => <option key={val.value} style={{background: 'black'}} value={val.value}>{val.text}</option>)}
+    </select></div>
   )
 }
 

@@ -1,18 +1,62 @@
 .vis {
-    height: 500px;
+    height: 100%;
     width: 200px;
-    /* position: fixed; */
-    float: left;
-    border: 2px solid red;
-    background-color: blue;
+    position: fixed;
+    border: 2px solid gray;
+    background-color: white;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    background-color: black
 }
 
 .novis {
-    height: 500px;
+    height: 100%;
     width: 200px;
-    /* position: fixed; */
-    float: left;
-    border: 2px solid red;
-    background-color: blue;
+    position: fixed;
+    border: 2px solid gray;
+    background-color: white;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
     display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    height: 35px;
+    transition-duration: 0.3s;
+
+}
+
+.btn:hover {
+    transform: scale(1.08);
+}
+
+.span {
+    margin-right: 5px;
+    font-size: 17px;
+}
+
+.tx {
+    color: white;
+    text-align: center;
+    background-color: black;
+}
+
+.tx2{
+    color: white;
+    background-color: black;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.close {
+    position: fixed;
+    color: white;
+    margin-left: 200px;
+    top: 0;
 }

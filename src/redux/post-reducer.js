@@ -30,9 +30,25 @@ let card = {
         { id: 24, img: img_store[3], name: 'Четвертый', cost: '7300 руб.', description: '' },
     ],
     card_noww: [''],
-    style_tatoo_card_filter: '',
+    style_tatoo_card_filter: [],
     sort_plus: false,
     sort_minus: false,
+    rendering_filter: false,
+    filter_combine: false,
+    arr_filter_combine: [],
+    total_page: function () {
+        return this.style_tatoo_card.length
+    },
+    page_now: 1,
+    card_drawn: 10,
+    only_users: function () {
+        card = []
+        for (let i = this.page_now * this.card_drawn - this.card_drawn; i < this.page_now * this.card_drawn; i++) {
+            this.style_tatoo_card[i] !== undefined && card.push(this.style_tatoo_card[i])
+        }
+        return card
+    },
+    reset_boolean: false
 }
 
 export let post = (state = card, action) => {
@@ -49,6 +65,7 @@ export let post = (state = card, action) => {
                 ...state,
                 sort_plus: true,
                 sort_minus: false,
+                rendering_filter: true,
                 style_tatoo_card_filter: state.style_tatoo_card_filter == ''
                     ? [...state.style_tatoo_card.sort((a, b) => a.name.localeCompare(b.name))]
                     : [...state.style_tatoo_card_filter].sort((a, b) => a.name.localeCompare(b.name))
@@ -60,6 +77,7 @@ export let post = (state = card, action) => {
                 ...state,
                 sort_minus: true,
                 sort_plus: false,
+                rendering_filter: true,
                 style_tatoo_card_filter: state.style_tatoo_card_filter == ''
                     ? [...state.style_tatoo_card.sort((a, b) => b.name.localeCompare(a.name))]
                     : [...state.style_tatoo_card_filter.sort((a, b) => b.name.localeCompare(a.name))]
@@ -67,10 +85,12 @@ export let post = (state = card, action) => {
         }
     }
     if (action.type === 'search') {
+
         if (state.sort_plus === true) {
             return {
-                ...state, 
-                style_tatoo_card_filter: [...state.style_tatoo_card
+                ...state,
+                rendering_filter: true,
+                style_tatoo_card_filter: [...state.style_tatoo_card_filter
                     .filter((name) => name.name
                         .toLowerCase()
                         .includes(action.text.toLowerCase()))
@@ -81,7 +101,8 @@ export let post = (state = card, action) => {
         else if (state.sort_minus === true) {
             return {
                 ...state,
-                style_tatoo_card_filter: [...state.style_tatoo_card
+                rendering_filter: true,
+                style_tatoo_card_filter: [...state.style_tatoo_card_filter
                     .filter((name) => name.name
                         .toLowerCase()
                         .includes(action.text.toLowerCase()))
@@ -91,17 +112,85 @@ export let post = (state = card, action) => {
         else {
             return {
                 ...state,
-                style_tatoo_card_filter: [...state.style_tatoo_card
-                    .filter((name) => name.name
-                    .toLowerCase()
-                    .includes(action.text.toLowerCase()))]
+                rendering_filter: true,
+                style_tatoo_card_filter: [...state.style_tatoo_card]
+                    .filter((name) => name.name.toLowerCase().includes(action.text.toLowerCase()))
             }
+        }
+    }
+    if (action.type === 'filter-caterogy') {
+        let b = []
+        let a = action.arr.map(x => [...state.style_tatoo_card].filter(y => y.name == x)).map(x => x.map(y => b.push(y)))
+        if (action.arr.length > 0) {
+            if (!state.rendering_filter) {
+                console.log(1)
+                return {
+                    ...state,
+                    rendering_filter: true,
+                    filter_combine: true,
+                    style_tatoo_card_filter: [...state.style_tatoo_card].filter(name => name.name.includes(action.arr))
+                }
+            }
+            else if (state.rendering_filter == true) {
+                return {
+                    ...state,
+                    rendering_filter: true,
+                    filter_combine: true,
+                    style_tatoo_card_filter: [...new Set(b)]
+
+                }
+            }
+        } else {
+            console.log('ss')
+            return {
+                ...state,
+                filter_combine: false,
+                rendering_filter: false,
+                arr_filter_combine: []
+                // style_tatoo_card_filter: [...state.style_tatoo_card]
+            }
+        }
+    }
+    if (action.type === 'pages') {
+        card = []
+        for (let i = action.page * state.card_drawn - state.card_drawn; i < action.page * state.card_drawn; i++) {
+            state.style_tatoo_card[i] !== undefined && card.push(state.style_tatoo_card[i])
+        }
+        return {
+            ...state,
+            page_now: action.page,
+            rendering_filter: true,
+            style_tatoo_card_filter: card
+
+        }
+    }
+    if (action.type === 'reset') {
+        if (action.bool === true) {
+            console.log('отработал')
+            return {
+                ...state,
+                style_tatoo_card_filter: [],
+                sort_plus: false,
+                sort_minus: false,
+                rendering_filter: false,
+                filter_combine: false,
+                arr_filter_combine: [],
+                reset_boolean: true,
+            }
+        } else {
+            console.log('отработал false')
+            return {
+            ...state,
+            reset_boolean: false
+        }
         }
 
     }
-
     return state
 }
 export let ids = (id) => ({ type: 'ids', id: id })
 export let sort_plus = (value) => ({ type: 'sort_plus', value: value })
 export let search = (text) => ({ type: 'search', text: text })
+export let filter_caterogy = (arr) => ({ type: 'filter-caterogy', arr: arr })
+export let pages = (page) => ({ type: 'pages', page: page })
+export let reset = (bool) => ({ type: 'reset', bool: bool })

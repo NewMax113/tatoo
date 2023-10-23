@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-
+import style from './input.module.css'
 
 
 function Input({ className, onChange }) {
@@ -16,7 +16,9 @@ function Input({ className, onChange }) {
         <input
             ref={ref}
             onChange={e => onChange(a(e))}
-            className={className}
+            className={style.st}
+            type='search'
+            placeholder='Поиск...'
         >
         </input>
         </>
